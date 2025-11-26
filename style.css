@@ -1,0 +1,170 @@
+      :root {
+        --bg-dark: #0f172a;
+        --bg-light: #1e3a8a;
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        --text-primary: #e2e8f0;
+        --text-gold: #fbbf24;
+      }
+
+      body {
+        font-family: "Lato", sans-serif;
+        background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
+        color: var(--text-primary);
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Elementos de fundo para realçar o efeito Glass */
+      .blob {
+        position: absolute;
+        filter: blur(80px);
+        z-index: -1;
+        opacity: 0.6;
+        animation: float 10s infinite ease-in-out alternate;
+      }
+      .blob-1 {
+        top: -10%;
+        left: -10%;
+        width: 500px;
+        height: 500px;
+        background: #1e40af;
+      }
+      .blob-2 {
+        bottom: -10%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: #172554;
+      }
+      .blob-3 {
+        top: 40%;
+        left: 30%;
+        width: 300px;
+        height: 300px;
+        background: #3b82f6;
+        opacity: 0.2;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(30px, 30px);
+        }
+      }
+
+      h1,
+      h2,
+      h3,
+      .brand-font {
+        font-family: "Cinzel", serif;
+      }
+
+      /* Classe Glassmorphism Liquid */
+      .glass-panel {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        box-shadow: var(--glass-shadow);
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+
+      .glass-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Botões */
+      .btn-gold {
+        background: linear-gradient(45deg, #b45309, #fbbf24);
+        color: #0f172a;
+        font-weight: bold;
+        border: none;
+        transition: all 0.3s ease;
+      }
+      .btn-gold:hover {
+        filter: brightness(1.1);
+        box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+      }
+
+      .btn-glass {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        transition: all 0.3s;
+      }
+      .btn-glass:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Navegação */
+      .nav-link {
+        position: relative;
+        color: #94a3b8;
+        transition: color 0.3s;
+        cursor: pointer;
+      }
+      .nav-link:hover,
+      .nav-link.active {
+        color: #fff;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: var(--text-gold);
+        transition: width 0.3s;
+      }
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      /* Sistema de Páginas */
+      .page-section {
+        display: none;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+      .page-section.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0f172a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #334155;
+        border-radius: 4px;
+      }
