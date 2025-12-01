@@ -1,148 +1,142 @@
 :root {
-  --bg-dark: #0f172a;
-  --bg-light: #1e3a8a;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  --text-primary: #e2e8f0;
-  --text-gold: #fbbf24;
+  /* Cores extraídas/inspiradas na Logo */
+  --bg-logo-cyan: #e0f7fa; /* Fundo ciano claro */
+  --bg-gradient-end: #ffffff;
+  
+  --primary-blue: #004aad; /* Azul forte do texto "Funerária" */
+  --primary-dark: #0f172a; /* Preto/Cinza escuro para textos */
+  
+  --glass-bg: rgba(255, 255, 255, 0.7); /* Vidro branco */
+  --glass-border: rgba(0, 74, 173, 0.1); /* Borda azulada suave */
+  --glass-shadow: 0 8px 32px rgba(0, 74, 173, 0.1);
 }
 
-/* --- CORREÇÃO DE ROLAGEM (MOBILE FIX) --- */
+/* --- RESET & LAYOUT --- */
 html {
-  /* Removemos qualquer regra de overflow daqui */
+  width: 100%;
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Lato", sans-serif;
-  background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
-  color: var(--text-primary);
-  /* Altura mínima para garantir que cubra a tela, mas sem travar */
+  /* Fonte mudada para combinar com a logo (Sans-Serif) */
+  font-family: 'Lato', sans-serif; 
+  background: linear-gradient(to bottom, var(--bg-logo-cyan), var(--bg-gradient-end));
+  color: var(--primary-dark);
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  /* IMPORTANTE: Removemos overflow-x hidden daqui para destravar o scroll vertical */
   position: relative;
+  overflow-x: hidden;
 }
 
-/* --- BLOBS OTIMIZADAS --- */
-.blob {
-  /* Mudamos de absolute para FIXED. 
-     Isso impede que elas criem barra de rolagem lateral */
-  position: fixed; 
-  filter: blur(80px);
+/* --- EFEITO WIREFRAME (SUBSTITUI AS BLOBS) --- */
+/* Isso cria uma grade suave no fundo para lembrar o rosto 3D da logo */
+.wireframe-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
-  opacity: 0.6;
-  border-radius: 50%;
-  will-change: transform;
-  animation: float 10s infinite ease-in-out alternate;
-  /* Garante que não capturem toques na tela */
-  pointer-events: none; 
+  background-image: 
+    linear-gradient(var(--glass-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-.blob-1 {
-  top: -10%;
-  left: -10%;
-  width: 500px;
-  height: 500px;
-  background: #1e40af;
-}
-
-.blob-2 {
-  bottom: -10%;
-  right: -10%;
-  width: 600px;
-  height: 600px;
-  background: #172554;
-}
-
-.blob-3 {
-  top: 40%;
-  left: 30%;
-  width: 300px;
-  height: 300px;
-  background: #3b82f6;
-  opacity: 0.2;
-}
-
-@keyframes float {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(30px, 30px); }
-}
-
+/* Títulos agora usam fonte grossa Sans-Serif igual a logo */
 h1, h2, h3, .brand-font {
-  font-family: "Cinzel", serif;
+  font-family: 'Montserrat', sans-serif; /* Vamos importar essa fonte no HTML */
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--primary-blue);
+  letter-spacing: -0.5px;
 }
 
-/* --- GLASSMORPHISM --- */
+/* --- GLASSMORPHISM CLARO --- */
 .glass-panel {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
   box-shadow: var(--glass-shadow);
 }
 
+/* Navbar específica */
+nav.glass-panel {
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 2px solid var(--primary-blue); /* Linha azul embaixo do menu */
+}
+
+/* Cartões */
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 12px;
-  transition: transform 0.3s ease, background 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
 }
 
 .glass-card:hover {
   transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0, 74, 173, 0.15);
+  border-color: var(--primary-blue);
 }
 
 /* --- BOTÕES --- */
-.btn-gold {
-  background: linear-gradient(45deg, #b45309, #fbbf24);
-  color: #0f172a;
+/* Botão Azul Forte (Baseado no texto da logo) */
+.btn-primary {
+  background: var(--primary-blue);
+  color: #ffffff;
   font-weight: bold;
   border: none;
   transition: all 0.3s ease;
   cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 74, 173, 0.3);
 }
-.btn-gold:hover {
-  filter: brightness(1.1);
-  box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+.btn-primary:hover {
+  background: #003380;
+  transform: scale(1.02);
 }
 
-.btn-glass {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
+/* Botão Outline */
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary-blue);
+  color: var(--primary-blue);
+  font-weight: bold;
   transition: all 0.3s;
   cursor: pointer;
 }
-.btn-glass:hover {
-  background: rgba(255, 255, 255, 0.2);
+.btn-outline:hover {
+  background: var(--primary-blue);
+  color: white;
 }
 
 /* --- NAVEGAÇÃO --- */
 .nav-link {
   position: relative;
-  color: #94a3b8;
+  color: #64748b; /* Cinza médio */
   transition: color 0.3s;
   cursor: pointer;
+  font-weight: 700;
 }
 .nav-link:hover,
 .nav-link.active {
-  color: #fff;
+  color: var(--primary-blue);
 }
 .nav-link::after {
   content: "";
   position: absolute;
   width: 0;
-  height: 2px;
+  height: 3px;
   bottom: -4px;
   left: 0;
-  background-color: var(--text-gold);
+  background-color: var(--primary-blue);
   transition: width 0.3s;
 }
 .nav-link:hover::after,
@@ -152,24 +146,16 @@ h1, h2, h3, .brand-font {
 
 /* --- ANIMAÇÕES --- */
 .fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
+  animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Scrollbar Personalizada (Apenas Desktop) */
 @media (min-width: 768px) {
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #0f172a;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #334155;
-    border-radius: 4px;
-  }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg-logo-cyan); }
+  ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 5px; }
 }
