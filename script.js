@@ -1,35 +1,60 @@
-// DADOS (Simulando um banco de dados)
+// --- BANCO DE DADOS (Simulado) ---
+
 const servicosData = [
-    { icon: 'fa-hands-holding-circle', title: 'Preparação', desc: 'Cuidado completo com tanatopraxia e vestimenta.' },
-    { icon: 'fa-truck-medical', title: 'Transporte', desc: 'Traslado local e regional com veículos regularizados.' },
-    { icon: 'fa-spa', title: 'Coroas de Flores', desc: 'Homenagens tradicionais com respeito e beleza.' }
+    { icon: 'fa-hands-holding-circle', title: 'Preparação e Higienização', desc: 'Cuidado completo com a preparação do corpo, vestimenta e tanatopraxia com o máximo respeito.' },
+    { icon: 'fa-truck-medical', title: 'Transporte Funerário', desc: 'Traslado local e regional com veículos adaptados e regularizados para garantir segurança.' },
+    { icon: 'fa-spa', title: 'Coroas de Flores', desc: 'Belas homenagens através de coroas de flores tradicionais.' }
 ];
 
 const urnasData = [
-    { title: 'Modelo Standard', desc: 'Acabamento em verniz simples.', tag: 'Reflorestada', color: 'from-gray-700 to-gray-900' },
-    { title: 'Modelo Nogueira', desc: 'Acabamento clássico e robusto.', tag: 'Madeira Maciça', color: 'from-amber-900 to-amber-950' },
-    { title: 'Modelo Luxo', desc: 'Visor completo e alças de metal.', tag: 'Premium', color: 'from-slate-600 to-slate-800' },
+    { title: 'Modelo Standard', desc: 'Acabamento em verniz simples.', tag: 'Madeira Reflorestada', color: 'from-gray-700 to-gray-900', iconColor: 'text-white/20' },
+    { title: 'Modelo Nogueira', desc: 'Acabamento clássico e robusto.', tag: 'Madeira Maciça', color: 'from-amber-900 to-amber-950', iconColor: 'text-white/20' },
+    { title: 'Modelo Luxo', desc: 'Visor completo e alças de metal.', tag: 'Acabamento Premium', color: 'from-slate-600 to-slate-800', iconColor: 'text-white/20' },
     { title: 'Modelo Infantil', desc: 'Delicadeza e serenidade.', tag: 'Branco Laqueado', color: 'bg-white', iconColor: 'text-gray-300' }
 ];
 
-// --- COMPONENTES (Funções que retornam Strings de HTML) ---
+const moldurasData = [
+    { 
+        title: 'Moldura Oval Clássica', 
+        material: 'Bronze', 
+        desc: 'Acabamento refinado em bronze, resistente ao tempo e oxidação.',
+        shapeClass: 'rounded-[50%] border-yellow-600 bg-gradient-to-b from-gray-300 to-gray-400'
+    },
+    { 
+        title: 'Moldura Retangular', 
+        material: 'Alumínio / Inox', 
+        desc: 'Design moderno em aço inoxidável, brilho duradouro e fácil limpeza.',
+        shapeClass: 'border-gray-400 bg-gradient-to-b from-gray-100 to-gray-300'
+    },
+    { 
+        title: 'Placa de Homenagem', 
+        material: 'Granito & Ouro', 
+        desc: 'Placa gravada a laser com detalhes em folha de ouro.',
+        shapeClass: 'rounded-lg border-gray-600 bg-gradient-to-b from-gray-800 to-black'
+    }
+];
 
+// --- COMPONENTES (Funções que geram HTML) ---
+
+// 1. HOME COMPONENTS
 const getHeroSection = () => `
-    <header class="relative py-20 lg:py-32 text-center">
-        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Respeito e Dignidade <br />
-            <span class="text-amber-400 text-3xl md:text-5xl mt-2 block">Nos Momentos Difíceis</span>
-        </h1>
-        <p class="mt-4 max-w-2xl mx-auto text-xl text-blue-200">
-            Servindo as famílias de Brasiléia, Acre, com compaixão.
-        </p>
-        <div class="mt-10 flex justify-center gap-4">
-            <button onclick="router('contato')" class="btn-gold px-8 py-3 rounded-full text-lg shadow-lg">Atendimento</button>
+    <header class="relative py-20 lg:py-32 overflow-hidden text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Respeito e Dignidade <br />
+                <span class="text-amber-400 text-3xl md:text-5xl mt-2 block">Nos Momentos Difíceis</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-blue-200">
+                Servindo as famílias de Brasiléia, Acre, com compaixão e profissionalismo.
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <button onclick="router('contato')" class="btn-gold px-8 py-3 rounded-full text-lg shadow-lg">Atendimento Imediato</button>
+                <button onclick="scrollToPlanos()" class="btn-glass px-8 py-3 rounded-full text-lg backdrop-blur-md">Conhecer Plano</button>
+            </div>
         </div>
     </header>
 `;
 
-// Exemplo de construção manual usando map para performance
 const getServicesSection = () => {
     const cards = servicosData.map(s => `
         <div class="glass-card p-8 text-center">
@@ -42,41 +67,66 @@ const getServicesSection = () => {
     `).join('');
 
     return `
-        <section class="py-16 max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-white mb-12 text-center">Nossos Serviços</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">${cards}</div>
+        <section class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white mb-4">Nossos Serviços</h2>
+                    <div class="w-24 h-1 bg-amber-400 mx-auto rounded"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">${cards}</div>
+            </div>
         </section>
     `;
 };
 
-// --- USO DO DOCUMENT FRAGMENT (Técnica Solicitada) ---
-// Vamos usar o fragment para montar a lista de Urnas de forma performática
+const getPlanosSection = () => `
+    <section id="planos" class="py-16 max-w-4xl mx-auto px-4">
+        <div class="glass-panel p-8 md:p-12 relative overflow-hidden text-center border-t-4 border-amber-400">
+            <div class="absolute top-0 right-0 p-4 opacity-10 text-9xl text-white">
+                <i class="fa-solid fa-shield-heart"></i>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">Plano Proteção Familiar</h2>
+            <h3 class="text-xl text-amber-400 mb-8 font-light">Cristo Rei</h3>
+            <p class="text-blue-100 mb-8 max-w-2xl mx-auto">
+                Garanta a tranquilidade da sua família com nosso plano exclusivo. Cobertura completa para que você não precise se preocupar com burocracias.
+            </p>
+            <ul class="text-left max-w-lg mx-auto space-y-4 mb-10 text-blue-100">
+                <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-3"></i> Urna mortuária padrão luxo</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-3"></i> Ornamentação completa</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-3"></i> Translado (dentro do município)</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-3"></i> Assistência burocrática</li>
+            </ul>
+            <button onclick="router('contato')" class="btn-gold px-10 py-4 rounded-lg font-bold text-lg w-full md:w-auto">Contratar Agora</button>
+        </div>
+    </section>
+`;
+
+// Função otimizada com Fragment para as Urnas
 const createUrnasSection = () => {
     const section = document.createElement('section');
-    section.className = 'py-16 glass-panel mx-4 md:mx-auto max-w-7xl mb-16 px-6';
-    
-    // Cabeçalho da seção
-    const headerHTML = `
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-white mb-4">Urnas Disponíveis</h2>
-            <p class="text-blue-200">Trabalhamos com diversos modelos de alta qualidade.</p>
+    section.className = 'py-16 glass-panel mx-4 md:mx-auto max-w-7xl mb-16';
+    section.innerHTML = `
+        <div class="px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-4">Urnas Disponíveis</h2>
+                <p class="text-blue-200">Trabalhamos com diversos modelos de alta qualidade.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="urnas-grid"></div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="urnas-grid"></div>
     `;
-    section.innerHTML = headerHTML;
 
-    // Criando o Fragmento
     const fragment = document.createDocumentFragment();
-    const gridContainer = section.querySelector('#urnas-grid');
+    const grid = section.querySelector('#urnas-grid');
 
     urnasData.forEach(u => {
-        const card = document.createElement('div');
-        card.className = 'glass-card overflow-hidden group';
-        const iconColor = u.iconColor || 'text-white/20';
+        const div = document.createElement('div');
+        div.className = 'glass-card overflow-hidden group';
+        const bgClass = u.color.includes('bg-') ? u.color : `bg-gradient-to-br ${u.color}`;
         
-        card.innerHTML = `
-            <div class="h-48 ${u.color.includes('gradient') ? 'bg-gradient-to-br' : ''} ${u.color} flex items-center justify-center relative">
-                <i class="fa-solid fa-box-open text-6xl ${iconColor} group-hover:scale-110 transition-transform duration-500"></i>
+        div.innerHTML = `
+            <div class="h-48 ${bgClass} flex items-center justify-center relative">
+                <i class="fa-solid fa-box-open text-6xl ${u.iconColor} group-hover:scale-110 transition-transform duration-500"></i>
+                <span class="absolute bottom-2 right-2 text-xs opacity-40 mix-blend-overlay">Imagem Ilustrativa</span>
             </div>
             <div class="p-4">
                 <h4 class="text-lg font-bold text-white">${u.title}</h4>
@@ -84,91 +134,163 @@ const createUrnasSection = () => {
                 <span class="text-amber-400 text-sm font-bold">${u.tag}</span>
             </div>
         `;
-        // Adiciona ao fragmento (ainda não está na tela)
-        fragment.appendChild(card);
+        fragment.appendChild(div);
     });
 
-    // Injeta tudo de uma vez no DOM (Reflow único = Performance)
-    gridContainer.appendChild(fragment);
-    
+    grid.appendChild(fragment);
     return section;
 };
 
-// --- ROTEAMENTO E RENDERIZAÇÃO ---
+// 2. MOLDURAS PAGE (Com Fragment)
+const createMoldurasPage = () => {
+    const container = document.createElement('div');
+    container.className = 'max-w-7xl mx-auto px-4 py-16 page-section fade-in';
+    
+    container.innerHTML = `
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-white mb-4">Molduras para Túmulos</h2>
+            <p class="text-xl text-blue-200 max-w-2xl mx-auto">
+                Eternize a memória com nossas molduras personalizadas de alta durabilidade e elegância.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="molduras-grid"></div>
+    `;
+
+    const fragment = document.createDocumentFragment();
+    const grid = container.querySelector('#molduras-grid');
+
+    moldurasData.forEach(m => {
+        const card = document.createElement('div');
+        card.className = 'glass-card p-6 flex flex-col items-center text-center';
+        
+        card.innerHTML = `
+            <div class="w-40 h-52 ${m.shapeClass} shadow-xl mb-6 flex items-center justify-center relative border-4">
+                <span class="text-gray-600 italic font-serif">Foto</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">${m.title}</h3>
+            <p class="text-amber-400 font-bold mb-2">${m.material}</p>
+            <p class="text-sm text-blue-200 mb-4">${m.desc}</p>
+            <button onclick="router('contato')" class="btn-glass px-6 py-2 rounded-full text-sm mt-auto">Solicitar Orçamento</button>
+        `;
+        fragment.appendChild(card);
+    });
+
+    grid.appendChild(fragment);
+    return container;
+};
+
+// --- ROTEADOR E LÓGICA DE NAVEGAÇÃO ---
 
 const pages = {
     home: () => {
-        const container = document.createDocumentFragment();
+        const container = document.createElement('div');
+        container.className = 'fade-in';
         
-        // Converte strings HTML em elementos reais
-        const heroDiv = document.createElement('div');
-        heroDiv.innerHTML = getHeroSection();
-        container.appendChild(heroDiv);
-
-        const servicosDiv = document.createElement('div');
-        servicosDiv.innerHTML = getServicesSection();
-        container.appendChild(servicosDiv);
-
-        // Adiciona a seção de urnas (que já retorna um elemento DOM)
+        container.insertAdjacentHTML('beforeend', getHeroSection());
+        container.insertAdjacentHTML('beforeend', getServicesSection());
         container.appendChild(createUrnasSection());
-
+        container.insertAdjacentHTML('beforeend', getPlanosSection());
+        
         return container;
     },
     sobre: () => {
         const div = document.createElement('div');
-        div.className = "max-w-5xl mx-auto px-4 py-16";
+        div.className = "page-section fade-in";
         div.innerHTML = `
-            <div class="glass-panel p-8 md:p-12">
-                <h2 class="text-4xl font-bold text-white mb-8">Nossa História</h2>
-                <p class="text-blue-100 mb-6">A Funerária Cristo Rei em Brasiléia...</p>
+            <div class="max-w-5xl mx-auto px-4 py-16">
+                <div class="glass-panel p-8 md:p-12">
+                    <h2 class="text-4xl font-bold text-white mb-8 border-b border-white/10 pb-4">Nossa História</h2>
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <p class="text-blue-100 mb-6 leading-relaxed">
+                                Localizada na acolhedora cidade de <strong>Brasiléia, Acre</strong>, a Funerária Cristo Rei nasceu com o propósito de oferecer amparo e dignidade às famílias.
+                            </p>
+                            <p class="text-blue-100 mb-6 leading-relaxed">
+                                Entendemos que a perda é um momento de dor, por isso cuidamos de todos os detalhes práticos e burocráticos.
+                            </p>
+                            <p class="text-blue-100 leading-relaxed">
+                                Respeitamos as decisões familiares, cuidando de toda a estrutura necessária para cerimônias e despedidas.
+                            </p>
+                        </div>
+                        <div class="h-64 md:h-full bg-blue-900/30 rounded-lg flex items-center justify-center border border-white/10 relative overflow-hidden">
+                            <i class="fa-solid fa-map-location-dot text-6xl text-white/20"></i>
+                            <div class="absolute bottom-4 text-center w-full">
+                                <span class="text-amber-400 font-bold tracking-widest uppercase">Brasiléia - AC</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
         `;
         return div;
     },
-    molduras: () => {
-        const div = document.createElement('div');
-        div.innerHTML = `<h1 class="text-center text-white text-4xl mt-20">Página de Molduras</h1>`;
-        return div;
-    },
+    molduras: () => createMoldurasPage(),
     contato: () => {
         const div = document.createElement('div');
-        div.innerHTML = `<h1 class="text-center text-white text-4xl mt-20">Fale Conosco</h1>`;
+        div.className = "page-section fade-in max-w-4xl mx-auto px-4 py-16";
+        div.innerHTML = `
+             <div class="glass-panel p-8 text-center">
+                <h2 class="text-3xl font-bold text-white mb-8">Entre em Contato</h2>
+                <div class="grid md:grid-cols-2 gap-8 text-left">
+                    <div>
+                        <h3 class="text-amber-400 font-bold mb-2">Endereço</h3>
+                        <p class="text-blue-200 mb-6">Brasiléia, AC<br>Atendimento 24h</p>
+                        
+                        <h3 class="text-amber-400 font-bold mb-2">Telefones</h3>
+                        <p class="text-blue-200 mb-6">(68) 9999-9999<br>(68) 3546-0000</p>
+                    </div>
+                    <div>
+                        <h3 class="text-amber-400 font-bold mb-4">Envie uma mensagem</h3>
+                        <form onsubmit="event.preventDefault(); alert('Mensagem enviada (simulação)!')" class="space-y-4">
+                            <input type="text" placeholder="Seu Nome" class="w-full p-3 rounded bg-blue-900/30 border border-blue-500/30 text-white placeholder-blue-300 focus:outline-none focus:border-amber-400">
+                            <input type="tel" placeholder="Seu Telefone" class="w-full p-3 rounded bg-blue-900/30 border border-blue-500/30 text-white placeholder-blue-300 focus:outline-none focus:border-amber-400">
+                            <textarea placeholder="Mensagem" rows="3" class="w-full p-3 rounded bg-blue-900/30 border border-blue-500/30 text-white placeholder-blue-300 focus:outline-none focus:border-amber-400"></textarea>
+                            <button class="btn-gold w-full py-3 rounded font-bold">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+             </div>
+        `;
         return div;
     }
 };
 
+// Navegação
 const router = (pageName) => {
     const appContainer = document.getElementById('app-container');
-    
-    // 1. Limpa o container atual
     appContainer.innerHTML = '';
     
-    // 2. Verifica se a página existe, senão vai para home
+    // Renderiza a página
     const renderFn = pages[pageName] || pages['home'];
-    
-    // 3. Executa a função da página que retorna o Fragmento ou Elemento
-    const content = renderFn();
-    
-    // 4. Inserção única no DOM
-    appContainer.appendChild(content);
+    appContainer.appendChild(renderFn());
 
-    // 5. Atualiza Menu e Scroll
-    updateActiveMenu(pageName);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-const updateActiveMenu = (pageName) => {
+    // Atualiza Menu
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if(link.dataset.page === pageName) link.classList.add('active');
     });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
+// Helpers
 const toggleMobileMenu = () => {
     document.getElementById('mobile-menu').classList.toggle('hidden');
 };
 
-// Inicialização
-document.addEventListener('DOMContentLoaded', () => {
-    router('home');
-});
+const scrollToPlanos = () => {
+    // Se não estiver na home, vai pra home primeiro
+    const planosSection = document.getElementById('planos');
+    if(!planosSection) {
+        router('home');
+        // Pequeno delay para esperar o DOM ser criado
+        setTimeout(() => {
+            document.getElementById('planos').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    } else {
+        planosSection.scrollIntoView({ behavior: 'smooth' });
+    }
+};
+
+// Iniciar
+document.addEventListener('DOMContentLoaded', () => router('home'));
