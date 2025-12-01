@@ -7,45 +7,44 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
-  </head>
-  <body class="text-gray-100 selection:bg-blue-500 selection:text-white">
     
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  </head>
+  <body class="text-slate-800 selection:bg-blue-600 selection:text-white">
+    
+    <div class="wireframe-bg"></div>
 
     <nav class="fixed w-full z-50 glass-panel rounded-none border-t-0 border-x-0 top-0">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
           <div class="flex items-center cursor-pointer" onclick="router('home')">
-            <i class="fa-solid fa-dove text-amber-400 text-2xl mr-3"></i>
+            <i class="fa-solid fa-dove text-[#004aad] text-2xl mr-3"></i>
             <div>
-              <span class="brand-font text-xl font-bold block text-white tracking-widest">CRISTO REI</span>
-              <span class="text-xs text-blue-300 block tracking-widest">FUNERÁRIA</span>
+              <span class="brand-font text-xl font-extrabold block text-[#004aad] tracking-tight leading-none">CRISTO REI</span>
+              <span class="text-xs text-slate-500 block tracking-widest font-bold">FUNERÁRIA</span>
             </div>
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-8">
-              <a onclick="router('home')" data-page="home" class="nav-link active font-medium">Início</a>
-              <a onclick="router('sobre')" data-page="sobre" class="nav-link font-medium">Sobre Nós</a>
-              <a onclick="router('molduras')" data-page="molduras" class="nav-link font-medium">Molduras</a>
-              <a onclick="router('contato')" data-page="contato" class="nav-link font-medium">Contato</a>
+              <a onclick="router('home')" data-page="home" class="nav-link active">Início</a>
+              <a onclick="router('sobre')" data-page="sobre" class="nav-link">Sobre Nós</a>
+              <a onclick="router('molduras')" data-page="molduras" class="nav-link">Molduras</a>
+              <a onclick="router('contato')" data-page="contato" class="nav-link">Contato</a>
             </div>
           </div>
           <div class="-mr-2 flex md:hidden">
-            <button onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10 focus:outline-none">
-              <i class="fa-solid fa-bars text-xl"></i>
+            <button onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-[#004aad] hover:bg-blue-50 focus:outline-none">
+              <i class="fa-solid fa-bars text-2xl"></i>
             </button>
           </div>
         </div>
       </div>
-      <div id="mobile-menu" class="hidden md:hidden glass-panel m-2 mt-0">
+      <div id="mobile-menu" class="hidden md:hidden glass-panel m-2 mt-0 bg-white border border-blue-100">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a onclick="router('home'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10 cursor-pointer">Início</a>
-          <a onclick="router('sobre'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10 cursor-pointer">Sobre Nós</a>
-          <a onclick="router('molduras'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10 cursor-pointer">Molduras</a>
-          <a onclick="router('contato'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10 cursor-pointer">Contato</a>
+          <a onclick="router('home'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-700 cursor-pointer">Início</a>
+          <a onclick="router('sobre'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-700 cursor-pointer">Sobre Nós</a>
+          <a onclick="router('molduras'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-700 cursor-pointer">Molduras</a>
+          <a onclick="router('contato'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-700 cursor-pointer">Contato</a>
         </div>
       </div>
     </nav>
@@ -54,6 +53,6 @@
 
     <main id="app-container" class="min-h-screen"></main>
 
-    <script src="script.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
