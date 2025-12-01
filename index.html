@@ -25,7 +25,6 @@
               <span class="text-xs text-blue-300 block tracking-widest">FUNERÁRIA</span>
             </div>
           </div>
-          
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-8">
               <a onclick="router('home')" data-page="home" class="nav-link active font-medium">Início</a>
@@ -34,26 +33,26 @@
               <a onclick="router('contato')" data-page="contato" class="nav-link font-medium">Contato</a>
             </div>
           </div>
-
           <div class="-mr-2 flex md:hidden">
-            <button onclick="toggleMobileMenu()" class="text-gray-400 hover:text-white p-2">
+            <button onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10 focus:outline-none">
               <i class="fa-solid fa-bars text-xl"></i>
             </button>
           </div>
         </div>
       </div>
-      
       <div id="mobile-menu" class="hidden md:hidden glass-panel m-2 mt-0">
-        <div class="px-2 pt-2 pb-3 space-y-1">
-          <a onclick="router('home'); toggleMobileMenu()" class="block px-3 py-2 text-base font-medium hover:bg-white/10 cursor-pointer">Início</a>
-          <a onclick="router('sobre'); toggleMobileMenu()" class="block px-3 py-2 text-base font-medium hover:bg-white/10 cursor-pointer">Sobre Nós</a>
-          <a onclick="router('molduras'); toggleMobileMenu()" class="block px-3 py-2 text-base font-medium hover:bg-white/10 cursor-pointer">Molduras</a>
-          <a onclick="router('contato'); toggleMobileMenu()" class="block px-3 py-2 text-base font-medium hover:bg-white/10 cursor-pointer">Contato</a>
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a onclick="router('home'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10 cursor-pointer">Início</a>
+          <a onclick="router('sobre'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10 cursor-pointer">Sobre Nós</a>
+          <a onclick="router('molduras'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10 cursor-pointer">Molduras</a>
+          <a onclick="router('contato'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10 cursor-pointer">Contato</a>
         </div>
       </div>
     </nav>
 
-    <div class="h-20"></div> <main id="app-container" class="fade-in min-h-screen"></main>
+    <div class="h-20"></div>
+
+    <main id="app-container" class="min-h-screen"></main>
 
     <script src="app.js"></script>
   </body>
