@@ -14,12 +14,25 @@ html, body {
   overflow-x: hidden;
 }
 
+html {
+  /* Removemos o overflow-x daqui para destravar a rolagem vertical */
+  height: auto;
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Lato", sans-serif;
   background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
   color: var(--text-primary);
+  
+  /* Configuração correta para permitir scroll vertical e esconder o horizontal */
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden; 
+  overflow-y: auto; /* Força a barra de rolagem vertical a funcionar */
   position: relative;
+  margin: 0;
+  padding: 0;
 }
 
 /* Elementos de fundo otimizados com will-change */
