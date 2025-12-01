@@ -8,10 +8,9 @@
   --text-gold: #fbbf24;
 }
 
-/* --- CORREÇÃO DE ROLAGEM (SCROLL) --- */
+/* --- CORREÇÃO DE ROLAGEM (MOBILE FIX) --- */
 html {
-  width: 100%;
-  overflow-x: hidden; /* Evita rolagem lateral */
+  /* Removemos qualquer regra de overflow daqui */
   scroll-behavior: smooth;
 }
 
@@ -19,29 +18,29 @@ body {
   font-family: "Lato", sans-serif;
   background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
   color: var(--text-primary);
-  
-  /* Permite que o corpo cresça com o conteúdo */
-  min-height: 100vh; 
-  width: 100%;
-  position: relative;
-  
-  /* Importante: Mantemos apenas overflow-x hidden. 
-     A rolagem vertical (Y) agora é nativa do navegador. */
-  overflow-x: hidden; 
+  /* Altura mínima para garantir que cubra a tela, mas sem travar */
+  min-height: 100vh;
   margin: 0;
   padding: 0;
+  /* IMPORTANTE: Removemos overflow-x hidden daqui para destravar o scroll vertical */
+  position: relative;
 }
 
-/* Elementos de fundo */
+/* --- BLOBS OTIMIZADAS --- */
 .blob {
-  position: absolute;
+  /* Mudamos de absolute para FIXED. 
+     Isso impede que elas criem barra de rolagem lateral */
+  position: fixed; 
   filter: blur(80px);
   z-index: -1;
   opacity: 0.6;
   border-radius: 50%;
-  will-change: transform; /* Otimização para celular */
+  will-change: transform;
   animation: float 10s infinite ease-in-out alternate;
+  /* Garante que não capturem toques na tela */
+  pointer-events: none; 
 }
+
 .blob-1 {
   top: -10%;
   left: -10%;
@@ -49,6 +48,7 @@ body {
   height: 500px;
   background: #1e40af;
 }
+
 .blob-2 {
   bottom: -10%;
   right: -10%;
@@ -56,6 +56,7 @@ body {
   height: 600px;
   background: #172554;
 }
+
 .blob-3 {
   top: 40%;
   left: 30%;
@@ -70,14 +71,11 @@ body {
   100% { transform: translate(30px, 30px); }
 }
 
-h1,
-h2,
-h3,
-.brand-font {
+h1, h2, h3, .brand-font {
   font-family: "Cinzel", serif;
 }
 
-/* Glassmorphism */
+/* --- GLASSMORPHISM --- */
 .glass-panel {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
@@ -101,13 +99,14 @@ h3,
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Botões */
+/* --- BOTÕES --- */
 .btn-gold {
   background: linear-gradient(45deg, #b45309, #fbbf24);
   color: #0f172a;
   font-weight: bold;
   border: none;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 .btn-gold:hover {
   filter: brightness(1.1);
@@ -119,12 +118,13 @@ h3,
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
   transition: all 0.3s;
+  cursor: pointer;
 }
 .btn-glass:hover {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Navegação */
+/* --- NAVEGAÇÃO --- */
 .nav-link {
   position: relative;
   color: #94a3b8;
@@ -150,30 +150,26 @@ h3,
   width: 100%;
 }
 
-/* Animação de Entrada */
+/* --- ANIMAÇÕES --- */
 .fade-in {
   animation: fadeIn 0.5s ease-out forwards;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Custom Scrollbar (Desktop) */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #0f172a;
-}
-::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 4px;
+/* Scrollbar Personalizada (Apenas Desktop) */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0f172a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+  }
 }
