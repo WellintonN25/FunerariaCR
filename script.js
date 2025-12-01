@@ -13,30 +13,47 @@ const urnasData = [
     { title: 'Modelo Infantil', desc: 'Delicadeza e serenidade.', tag: 'Branco Laqueado', color: 'bg-white', iconColor: 'text-gray-300' }
 ];
 
+// ATUALIZADO: Apenas Porcelana / Sublimação
 const moldurasData = [
     { 
-        title: 'Moldura Oval Clássica', 
-        material: 'Bronze', 
-        desc: 'Acabamento refinado em bronze, resistente ao tempo e oxidação.',
-        shapeClass: 'rounded-[50%] border-yellow-600 bg-gradient-to-b from-gray-300 to-gray-400'
+        title: 'Porcelana 10x10', 
+        size: '10cm x 10cm', 
+        format: 'Quadrado',
+        desc: 'Ideal para lápides menores ou composição com outras peças.',
+        cssAspect: 'w-32 h-32' // Define o formato visual
     },
     { 
-        title: 'Moldura Retangular', 
-        material: 'Alumínio / Inox', 
-        desc: 'Design moderno em aço inoxidável, brilho duradouro e fácil limpeza.',
-        shapeClass: 'border-gray-400 bg-gradient-to-b from-gray-100 to-gray-300'
+        title: 'Porcelana 10x15', 
+        size: '10cm x 15cm', 
+        format: 'Retangular',
+        desc: 'O formato clássico, perfeito para fotos de busto/rosto.',
+        cssAspect: 'w-32 h-48'
     },
     { 
-        title: 'Placa de Homenagem', 
-        material: 'Granito & Ouro', 
-        desc: 'Placa gravada a laser com detalhes em folha de ouro.',
-        shapeClass: 'rounded-lg border-gray-600 bg-gradient-to-b from-gray-800 to-black'
+        title: 'Porcelana 15x15', 
+        size: '15cm x 15cm', 
+        format: 'Quadrado',
+        desc: 'Tamanho médio com ótima visibilidade e acabamento brilhante.',
+        cssAspect: 'w-40 h-40'
+    },
+    { 
+        title: 'Porcelana 20x20', 
+        size: '20cm x 20cm', 
+        format: 'Quadrado',
+        desc: 'Grande destaque, permite fotos com maior nível de detalhes.',
+        cssAspect: 'w-48 h-48'
+    },
+    { 
+        title: 'Porcelana 20x30', 
+        size: '20cm x 30cm', 
+        format: 'Retangular',
+        desc: 'Formato especial grande. Ideal para homenagens completas.',
+        cssAspect: 'w-40 h-60'
     }
 ];
 
 // --- COMPONENTES (Funções que geram HTML) ---
 
-// 1. HOME COMPONENTS
 const getHeroSection = () => `
     <header class="relative py-20 lg:py-32 overflow-hidden text-center">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -101,7 +118,6 @@ const getPlanosSection = () => `
     </section>
 `;
 
-// Função otimizada com Fragment para as Urnas
 const createUrnasSection = () => {
     const section = document.createElement('section');
     section.className = 'py-16 glass-panel mx-4 md:mx-auto max-w-7xl mb-16';
@@ -141,16 +157,16 @@ const createUrnasSection = () => {
     return section;
 };
 
-// 2. MOLDURAS PAGE (Com Fragment)
+// 2. MOLDURAS PAGE (ATUALIZADA)
 const createMoldurasPage = () => {
     const container = document.createElement('div');
     container.className = 'max-w-7xl mx-auto px-4 py-16 page-section fade-in';
     
     container.innerHTML = `
         <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-white mb-4">Molduras para Túmulos</h2>
+            <h2 class="text-4xl font-bold text-white mb-4">Porcelanas para Túmulos</h2>
             <p class="text-xl text-blue-200 max-w-2xl mx-auto">
-                Eternize a memória com nossas molduras personalizadas de alta durabilidade e elegância.
+                Eternize a memória com nossas peças em porcelana de alta durabilidade, feitas por sublimação digital.
             </p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="molduras-grid"></div>
@@ -163,14 +179,24 @@ const createMoldurasPage = () => {
         const card = document.createElement('div');
         card.className = 'glass-card p-6 flex flex-col items-center text-center';
         
+        // Renderiza a "placa" visualmente com o formato correto
         card.innerHTML = `
-            <div class="w-40 h-52 ${m.shapeClass} shadow-xl mb-6 flex items-center justify-center relative border-4">
-                <span class="text-gray-600 italic font-serif">Foto</span>
+            <div class="${m.cssAspect} bg-white shadow-xl mb-6 flex items-center justify-center relative border-4 border-gray-300">
+                <div class="absolute inset-0 bg-gray-100 flex flex-col items-center justify-center p-2">
+                    <i class="fa-solid fa-image text-gray-400 text-2xl mb-1"></i>
+                    <span class="text-gray-500 text-xs font-serif italic">Sua Foto Aqui</span>
+                </div>
             </div>
+            
             <h3 class="text-xl font-bold text-white">${m.title}</h3>
-            <p class="text-amber-400 font-bold mb-2">${m.material}</p>
+            <p class="text-amber-400 font-bold mb-1">${m.size}</p>
+            <p class="text-xs text-blue-300 uppercase tracking-widest mb-3">Sublimação Digital</p>
+            
             <p class="text-sm text-blue-200 mb-4">${m.desc}</p>
-            <button onclick="router('contato')" class="btn-glass px-6 py-2 rounded-full text-sm mt-auto">Solicitar Orçamento</button>
+            
+            <button onclick="router('contato')" class="btn-glass px-6 py-2 rounded-full text-sm mt-auto hover:bg-white/20">
+                Solicitar Orçamento
+            </button>
         `;
         fragment.appendChild(card);
     });
@@ -179,18 +205,16 @@ const createMoldurasPage = () => {
     return container;
 };
 
-// --- ROTEADOR E LÓGICA DE NAVEGAÇÃO ---
+// --- ROTEADOR ---
 
 const pages = {
     home: () => {
         const container = document.createElement('div');
         container.className = 'fade-in';
-        
         container.insertAdjacentHTML('beforeend', getHeroSection());
         container.insertAdjacentHTML('beforeend', getServicesSection());
         container.appendChild(createUrnasSection());
         container.insertAdjacentHTML('beforeend', getPlanosSection());
-        
         return container;
     },
     sobre: () => {
@@ -203,13 +227,10 @@ const pages = {
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div>
                             <p class="text-blue-100 mb-6 leading-relaxed">
-                                Localizada na acolhedora cidade de <strong>Brasiléia, Acre</strong>, a Funerária Cristo Rei nasceu com o propósito de oferecer amparo e dignidade às famílias.
+                                Localizada na acolhedora cidade de <strong>Brasiléia, Acre</strong>, a Funerária Cristo Rei nasceu com o propósito de oferecer amparo e dignidade.
                             </p>
                             <p class="text-blue-100 mb-6 leading-relaxed">
-                                Entendemos que a perda é um momento de dor, por isso cuidamos de todos os detalhes práticos e burocráticos.
-                            </p>
-                            <p class="text-blue-100 leading-relaxed">
-                                Respeitamos as decisões familiares, cuidando de toda a estrutura necessária para cerimônias e despedidas.
+                                Cuidamos de todos os detalhes práticos e burocráticos para que a família possa se dedicar à despedida.
                             </p>
                         </div>
                         <div class="h-64 md:h-full bg-blue-900/30 rounded-lg flex items-center justify-center border border-white/10 relative overflow-hidden">
@@ -235,16 +256,15 @@ const pages = {
                     <div>
                         <h3 class="text-amber-400 font-bold mb-2">Endereço</h3>
                         <p class="text-blue-200 mb-6">Brasiléia, AC<br>Atendimento 24h</p>
-                        
                         <h3 class="text-amber-400 font-bold mb-2">Telefones</h3>
                         <p class="text-blue-200 mb-6">(68) 9999-9999<br>(68) 3546-0000</p>
                     </div>
                     <div>
                         <h3 class="text-amber-400 font-bold mb-4">Envie uma mensagem</h3>
-                        <form onsubmit="event.preventDefault(); alert('Mensagem enviada (simulação)!')" class="space-y-4">
-                            <input type="text" placeholder="Seu Nome" class="w-full p-3 rounded bg-blue-900/30 border border-blue-500/30 text-white placeholder-blue-300 focus:outline-none focus:border-amber-400">
-                            <input type="tel" placeholder="Seu Telefone" class="w-full p-3 rounded bg-blue-900/30 border border-blue-500/30 text-white placeholder-blue-300 focus:outline-none focus:border-amber-400">
-                            <textarea placeholder="Mensagem" rows="3" class="w-full p-3 rounded bg-blue-900/30 border border-blue-500/30 text-white placeholder-blue-300 focus:outline-none focus:border-amber-400"></textarea>
+                        <form onsubmit="event.preventDefault(); alert('Mensagem enviada!')" class="space-y-4">
+                            <input type="text" placeholder="Seu Nome" class="w-full p-3 rounded bg-blue-900/30 border border-blue-500/30 text-white focus:border-amber-400 outline-none">
+                            <input type="tel" placeholder="Seu Telefone" class="w-full p-3 rounded bg-blue-900/30 border border-blue-500/30 text-white focus:border-amber-400 outline-none">
+                            <textarea placeholder="Mensagem" rows="3" class="w-full p-3 rounded bg-blue-900/30 border border-blue-500/30 text-white focus:border-amber-400 outline-none"></textarea>
                             <button class="btn-gold w-full py-3 rounded font-bold">Enviar</button>
                         </form>
                     </div>
@@ -255,16 +275,12 @@ const pages = {
     }
 };
 
-// Navegação
 const router = (pageName) => {
     const appContainer = document.getElementById('app-container');
     appContainer.innerHTML = '';
-    
-    // Renderiza a página
     const renderFn = pages[pageName] || pages['home'];
     appContainer.appendChild(renderFn());
-
-    // Atualiza Menu
+    
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if(link.dataset.page === pageName) link.classList.add('active');
@@ -273,17 +289,14 @@ const router = (pageName) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-// Helpers
 const toggleMobileMenu = () => {
     document.getElementById('mobile-menu').classList.toggle('hidden');
 };
 
 const scrollToPlanos = () => {
-    // Se não estiver na home, vai pra home primeiro
     const planosSection = document.getElementById('planos');
     if(!planosSection) {
         router('home');
-        // Pequeno delay para esperar o DOM ser criado
         setTimeout(() => {
             document.getElementById('planos').scrollIntoView({ behavior: 'smooth' });
         }, 100);
@@ -292,5 +305,4 @@ const scrollToPlanos = () => {
     }
 };
 
-// Iniciar
 document.addEventListener('DOMContentLoaded', () => router('home'));
