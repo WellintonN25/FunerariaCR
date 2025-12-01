@@ -8,15 +8,10 @@
   --text-gold: #fbbf24;
 }
 
-/* CORREÇÃO CRÍTICA: Previne rolagem lateral no mobile */
-html, body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
+/* --- CORREÇÃO DE ROLAGEM (SCROLL) --- */
 html {
-  /* Removemos o overflow-x daqui para destravar a rolagem vertical */
-  height: auto;
+  width: 100%;
+  overflow-x: hidden; /* Evita rolagem lateral */
   scroll-behavior: smooth;
 }
 
@@ -25,36 +20,60 @@ body {
   background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
   color: var(--text-primary);
   
-  /* Configuração correta para permitir scroll vertical e esconder o horizontal */
-  min-height: 100vh;
+  /* Permite que o corpo cresça com o conteúdo */
+  min-height: 100vh; 
   width: 100%;
-  overflow-x: hidden; 
-  overflow-y: auto; /* Força a barra de rolagem vertical a funcionar */
   position: relative;
+  
+  /* Importante: Mantemos apenas overflow-x hidden. 
+     A rolagem vertical (Y) agora é nativa do navegador. */
+  overflow-x: hidden; 
   margin: 0;
   padding: 0;
 }
 
-/* Elementos de fundo otimizados com will-change */
+/* Elementos de fundo */
 .blob {
   position: absolute;
   filter: blur(80px);
   z-index: -1;
   opacity: 0.6;
   border-radius: 50%;
-  will-change: transform; /* Avisa a GPU para preparar a animação */
+  will-change: transform; /* Otimização para celular */
   animation: float 10s infinite ease-in-out alternate;
 }
-.blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: #1e40af; }
-.blob-2 { bottom: -10%; right: -10%; width: 600px; height: 600px; background: #172554; }
-.blob-3 { top: 40%; left: 30%; width: 300px; height: 300px; background: #3b82f6; opacity: 0.2; }
+.blob-1 {
+  top: -10%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  background: #1e40af;
+}
+.blob-2 {
+  bottom: -10%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: #172554;
+}
+.blob-3 {
+  top: 40%;
+  left: 30%;
+  width: 300px;
+  height: 300px;
+  background: #3b82f6;
+  opacity: 0.2;
+}
 
 @keyframes float {
   0% { transform: translate(0, 0); }
   100% { transform: translate(30px, 30px); }
 }
 
-h1, h2, h3, .brand-font {
+h1,
+h2,
+h3,
+.brand-font {
   font-family: "Cinzel", serif;
 }
 
@@ -112,7 +131,10 @@ h1, h2, h3, .brand-font {
   transition: color 0.3s;
   cursor: pointer;
 }
-.nav-link:hover, .nav-link.active { color: #fff; }
+.nav-link:hover,
+.nav-link.active {
+  color: #fff;
+}
 .nav-link::after {
   content: "";
   position: absolute;
@@ -123,19 +145,35 @@ h1, h2, h3, .brand-font {
   background-color: var(--text-gold);
   transition: width 0.3s;
 }
-.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
 
-/* Animação de Entrada de Página */
+/* Animação de Entrada */
 .fade-in {
   animation: fadeIn 0.5s ease-out forwards;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #0f172a; }
-::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+/* Custom Scrollbar (Desktop) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
