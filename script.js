@@ -1,4 +1,4 @@
-// --- DADOS (Mantidos, apenas ajuste visual na renderização) ---
+// --- DADOS (Mantidos) ---
 const servicosData = [
     { icon: 'fa-hands-holding-circle', title: 'Preparação e Higienização', desc: 'Cuidado completo com a preparação do corpo, vestimenta e tanatopraxia com o máximo respeito.' },
     { icon: 'fa-truck-medical', title: 'Transporte Funerário', desc: 'Traslado local e regional com veículos adaptados e regularizados para garantir segurança.' },
@@ -20,7 +20,7 @@ const moldurasData = [
     { title: 'Porcelana 20x30', size: '20cm x 30cm', format: 'Retangular', desc: 'Formato especial grande.', cssAspect: 'w-40 h-60' }
 ];
 
-// --- COMPONENTES (Tema Claro - Baseado na Logo) ---
+// --- COMPONENTES ---
 
 const getHeroSection = () => `
     <header class="relative py-20 lg:py-28 text-center overflow-hidden">
@@ -203,14 +203,20 @@ const pages = {
                                 Localizada na acolhedora cidade de <strong>Brasiléia, Acre</strong>, a Funerária Cristo Rei traz uma abordagem moderna e respeitosa.
                             </p>
                             <p class="text-slate-600 mb-6 leading-relaxed">
-                                Nossa missão é simplificar o momento mais difícil, cuidando de toda a burocracia e logística com transparência total.
+                                Nossa missão é simplificar o momento mais difícil, cuidando de toda a burocracia e logística com transparência total, localizada estrategicamente na Av. José Rui Lino.
                             </p>
                         </div>
-                        <div class="h-64 md:h-full bg-blue-50 rounded-xl flex items-center justify-center border border-blue-100 relative overflow-hidden">
-                            <i class="fa-solid fa-map-location-dot text-6xl text-[#004aad] opacity-20"></i>
-                            <div class="absolute bottom-4 text-center w-full">
-                                <span class="text-[#004aad] font-bold tracking-widest uppercase text-sm">Brasiléia - AC</span>
-                            </div>
+                        
+                        <div class="h-80 md:h-full bg-slate-100 rounded-xl overflow-hidden border border-blue-100 relative shadow-inner">
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                loading="lazy" 
+                                allowfullscreen 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                src="https://maps.google.com/maps?q=Av.+Jose+Rui+Lino,+902+-+Centro,+Brasileia+-+AC&t=&z=16&ie=UTF8&iwloc=&output=embed">
+                            </iframe>
                         </div>
                     </div>
                 </div>
@@ -229,7 +235,12 @@ const pages = {
                     <div>
                         <div class="mb-8">
                             <h3 class="text-slate-800 font-bold mb-1 text-lg">Endereço</h3>
-                            <p class="text-slate-600">Brasiléia, AC<br><span class="text-green-600 font-bold text-sm">● Atendimento 24h</span></p>
+                            <p class="text-slate-600">
+                                Av. José Rui Lino, nº 0902<br>
+                                Bairro Centro<br>
+                                Brasiléia - AC
+                            </p>
+                            <span class="text-green-600 font-bold text-sm mt-2 block">● Atendimento 24h</span>
                         </div>
                         <div>
                             <h3 class="text-slate-800 font-bold mb-1 text-lg">Telefones</h3>
