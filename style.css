@@ -1,13 +1,12 @@
 :root {
-  /* Cores extraídas/inspiradas na Logo */
-  --bg-logo-cyan: #e0f7fa; /* Fundo ciano claro */
+  /* Paleta baseada na Logo (Azul e Ciano) */
+  --bg-logo-cyan: #e0f7fa; 
   --bg-gradient-end: #ffffff;
+  --primary-blue: #004aad; 
+  --primary-dark: #0f172a; 
   
-  --primary-blue: #004aad; /* Azul forte do texto "Funerária" */
-  --primary-dark: #0f172a; /* Preto/Cinza escuro para textos */
-  
-  --glass-bg: rgba(255, 255, 255, 0.7); /* Vidro branco */
-  --glass-border: rgba(0, 74, 173, 0.1); /* Borda azulada suave */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 74, 173, 0.1);
   --glass-shadow: 0 8px 32px rgba(0, 74, 173, 0.1);
 }
 
@@ -18,7 +17,6 @@ html {
 }
 
 body {
-  /* Fonte mudada para combinar com a logo (Sans-Serif) */
   font-family: 'Lato', sans-serif; 
   background: linear-gradient(to bottom, var(--bg-logo-cyan), var(--bg-gradient-end));
   color: var(--primary-dark);
@@ -26,11 +24,10 @@ body {
   margin: 0;
   padding: 0;
   position: relative;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Previne rolagem lateral */
 }
 
-/* --- EFEITO WIREFRAME (SUBSTITUI AS BLOBS) --- */
-/* Isso cria uma grade suave no fundo para lembrar o rosto 3D da logo */
+/* --- EFEITO WIREFRAME (Fundo) --- */
 .wireframe-bg {
   position: fixed;
   top: 0;
@@ -46,16 +43,15 @@ body {
   pointer-events: none;
 }
 
-/* Títulos agora usam fonte grossa Sans-Serif igual a logo */
 h1, h2, h3, .brand-font {
-  font-family: 'Montserrat', sans-serif; /* Vamos importar essa fonte no HTML */
+  font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   text-transform: uppercase;
   color: var(--primary-blue);
   letter-spacing: -0.5px;
 }
 
-/* --- GLASSMORPHISM CLARO --- */
+/* --- GLASSMORPHISM --- */
 .glass-panel {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
@@ -64,13 +60,12 @@ h1, h2, h3, .brand-font {
   box-shadow: var(--glass-shadow);
 }
 
-/* Navbar específica */
 nav.glass-panel {
   background: rgba(255, 255, 255, 0.9);
-  border-bottom: 2px solid var(--primary-blue); /* Linha azul embaixo do menu */
+  border-bottom: 2px solid var(--primary-blue);
 }
 
-/* Cartões */
+/* Cartões Padrão (Sem Flip) */
 .glass-card {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(8px);
@@ -88,7 +83,6 @@ nav.glass-panel {
 }
 
 /* --- BOTÕES --- */
-/* Botão Azul Forte (Baseado no texto da logo) */
 .btn-primary {
   background: var(--primary-blue);
   color: #ffffff;
@@ -103,7 +97,6 @@ nav.glass-panel {
   transform: scale(1.02);
 }
 
-/* Botão Outline */
 .btn-outline {
   background: transparent;
   border: 2px solid var(--primary-blue);
@@ -120,15 +113,12 @@ nav.glass-panel {
 /* --- NAVEGAÇÃO --- */
 .nav-link {
   position: relative;
-  color: #64748b; /* Cinza médio */
+  color: #64748b;
   transition: color 0.3s;
   cursor: pointer;
   font-weight: 700;
 }
-.nav-link:hover,
-.nav-link.active {
-  color: var(--primary-blue);
-}
+.nav-link:hover, .nav-link.active { color: var(--primary-blue); }
 .nav-link::after {
   content: "";
   position: absolute;
@@ -139,23 +129,56 @@ nav.glass-panel {
   background-color: var(--primary-blue);
   transition: width 0.3s;
 }
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
-}
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
 /* --- ANIMAÇÕES --- */
 .fade-in {
   animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (min-width: 768px) {
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: var(--bg-logo-cyan); }
-  ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 5px; }
+/* --- ESTILOS DE FLIP CARD (URNAS GIRATÓRIAS) --- */
+.flip-scene {
+  perspective: 1000px; /* Profundidade 3D */
+}
+
+.flip-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Esconde o verso */
+  backface-visibility: hidden;
+  border-radius: 12px;
+  top: 0;
+  left: 0;
+}
+
+.flip-card-back {
+  background-color: var(--primary-dark); /* Fundo escuro para a foto */
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Efeito de Rotação: */
+/* 1. Desktop: Hover */
+@media (hover: hover) {
+  .flip-scene:hover .flip-card {
+    transform: rotateY(180deg);
+  }
+}
+/* 2. Mobile: Classe adicionada via JS */
+.is-flipped-mobile .flip-card {
+  transform: rotateY(180deg);
 }
