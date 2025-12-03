@@ -1,12 +1,10 @@
 // --- DADOS DO SISTEMA ---
-
 const servicosData = [
     { icon: 'fa-hands-holding-circle', title: 'Preparação', desc: 'Cuidado completo com tanatopraxia e vestimenta.' },
     { icon: 'fa-truck-medical', title: 'Transporte', desc: 'Traslado local e regional com veículos regularizados.' },
     { icon: 'fa-spa', title: 'Coroas de Flores', desc: 'Homenagens tradicionais com respeito e beleza.' }
 ];
 
-// DADOS DAS URNAS (Com link para IMAGENS)
 const urnasData = [
     { 
         title: 'Modelo Standard', 
@@ -14,7 +12,6 @@ const urnasData = [
         tag: 'Madeira Reflorestada', 
         color: 'bg-slate-100', 
         iconColor: 'text-slate-300',
-        // COLOQUE O LINK DA FOTO DA URNA ABAIXO
         image: 'https://via.placeholder.com/400x600/e2e8f0/004aad?text=Urna+Standard' 
     },
     { 
@@ -23,7 +20,6 @@ const urnasData = [
         tag: 'Madeira Maciça', 
         color: 'bg-amber-50', 
         iconColor: 'text-amber-200',
-        // COLOQUE O LINK DA FOTO DA URNA ABAIXO
         image: 'https://via.placeholder.com/400x600/fef3c7/b45309?text=Urna+Nogueira' 
     },
     { 
@@ -32,7 +28,6 @@ const urnasData = [
         tag: 'Acabamento Premium', 
         color: 'bg-slate-200', 
         iconColor: 'text-slate-400',
-        // COLOQUE O LINK DA FOTO DA URNA ABAIXO
         image: 'https://via.placeholder.com/400x600/cbd5e1/1e293b?text=Urna+Luxo' 
     },
     { 
@@ -41,7 +36,6 @@ const urnasData = [
         tag: 'Branco Laqueado', 
         color: 'bg-white border border-slate-100', 
         iconColor: 'text-slate-200',
-        // COLOQUE O LINK DA FOTO DA URNA ABAIXO
         image: 'https://via.placeholder.com/400x600/ffffff/94a3b8?text=Urna+Infantil' 
     }
 ];
@@ -99,7 +93,6 @@ const getPlanosSection = () => `
     </section>
 `;
 
-// --- SEÇÃO DE URNAS COM GIRO 3D ---
 const createUrnasSection = () => {
     const section = document.createElement('section');
     section.className = 'py-16 mx-4 md:mx-auto max-w-7xl mb-16';
@@ -107,7 +100,7 @@ const createUrnasSection = () => {
         <div class="px-6">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-extrabold text-slate-800 mb-4">Urnas Disponíveis</h2>
-                <p class="text-slate-500">Toque ou passe o mouse para ver a foto real.</p>
+                <p class="text-slate-500">Clique no card para ver a foto real.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="urnas-grid"></div>
         </div>
@@ -117,12 +110,12 @@ const createUrnasSection = () => {
     const grid = section.querySelector('#urnas-grid');
 
     urnasData.forEach(u => {
-        // CENA 3D
         const scene = document.createElement('div');
         scene.className = 'flip-scene h-80 cursor-pointer group'; 
         
-        // Clique no Mobile para Girar
-        scene.onclick = function() { this.classList.toggle('is-flipped-mobile'); };
+        scene.onclick = function() { 
+            this.classList.toggle('is-flipped'); 
+        };
 
         scene.innerHTML = `
             <div class="flip-card">
@@ -142,7 +135,7 @@ const createUrnasSection = () => {
                     <img src="${u.image}" alt="${u.title}" class="w-full h-full object-cover">
                     <div class="absolute bottom-0 w-full bg-gradient-to-t from-black/90 to-transparent p-4 text-white">
                         <p class="font-bold text-lg">${u.title}</p>
-                        <p class="text-xs opacity-80">Toque para voltar</p>
+                        <p class="text-xs opacity-80">Clique para voltar</p>
                     </div>
                 </div>
             </div>
@@ -154,7 +147,6 @@ const createUrnasSection = () => {
     return section;
 };
 
-// --- MOLDURAS (Porcelana) ---
 const createMoldurasPage = () => {
     const container = document.createElement('div');
     container.className = 'max-w-7xl mx-auto px-4 py-16 page-section fade-in';
@@ -191,7 +183,6 @@ const createMoldurasPage = () => {
     return container;
 };
 
-// --- ROTEAMENTO ---
 const pages = {
     home: () => {
         const container = document.createElement('div');

@@ -1,5 +1,4 @@
 :root {
-  /* Paleta baseada na Logo (Azul e Ciano) */
   --bg-logo-cyan: #e0f7fa; 
   --bg-gradient-end: #ffffff;
   --primary-blue: #004aad; 
@@ -10,7 +9,6 @@
   --glass-shadow: 0 8px 32px rgba(0, 74, 173, 0.1);
 }
 
-/* --- RESET & LAYOUT --- */
 html {
   width: 100%;
   scroll-behavior: smooth;
@@ -24,10 +22,9 @@ body {
   margin: 0;
   padding: 0;
   position: relative;
-  overflow-x: hidden; /* Previne rolagem lateral */
+  overflow-x: hidden;
 }
 
-/* --- EFEITO WIREFRAME (Fundo) --- */
 .wireframe-bg {
   position: fixed;
   top: 0;
@@ -65,7 +62,6 @@ nav.glass-panel {
   border-bottom: 2px solid var(--primary-blue);
 }
 
-/* Cartões Padrão (Sem Flip) */
 .glass-card {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(8px);
@@ -75,7 +71,8 @@ nav.glass-panel {
   transition: all 0.3s ease;
 }
 
-.glass-card:hover {
+/* Hover padrão para coisas que NÃO SÃO urnas */
+.glass-card:not(.flip-card-face):hover {
   transform: translateY(-5px);
   background: #fff;
   box-shadow: 0 10px 20px rgba(0, 74, 173, 0.15);
@@ -140,9 +137,9 @@ nav.glass-panel {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- ESTILOS DE FLIP CARD (URNAS GIRATÓRIAS) --- */
+/* --- ESTILOS DE FLIP CARD (CORRIGIDO) --- */
 .flip-scene {
-  perspective: 1000px; /* Profundidade 3D */
+  perspective: 1000px;
 }
 
 .flip-card {
@@ -157,28 +154,34 @@ nav.glass-panel {
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Esconde o verso */
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 12px;
   top: 0;
   left: 0;
+  /* Importante: garante que o verso não capture mouse quando escondido */
+  z-index: 2; 
 }
 
 .flip-card-back {
-  background-color: var(--primary-dark); /* Fundo escuro para a foto */
+  background-color: var(--primary-dark);
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
+  z-index: 1; /* Verso fica atrás */
 }
 
-/* Efeito de Rotação: */
-/* 1. Desktop: Hover */
-@media (hover: hover) {
-  .flip-scene:hover .flip-card {
-    transform: rotateY(180deg);
-  }
-}
-/* 2. Mobile: Classe adicionada via JS */
-.is-flipped-mobile .flip-card {
+/* CLASSE DE ROTAÇÃO */
+.is-flipped .flip-card {
   transform: rotateY(180deg);
+}
+
+/* --- A CURA DO BUG --- */
+/* Quando virado, o verso ganha prioridade de clique */
+.is-flipped .flip-card-back {
+  z-index: 5;
+}
+/* Quando virado, a frente ignora o mouse (evita flicker) */
+.is-flipped .flip-card-front {
+  pointer-events: none;
 }
